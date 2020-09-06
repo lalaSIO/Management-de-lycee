@@ -18,18 +18,21 @@ class Cursus(models.Model):
       max_length=9,
       blank=False,
       null=True,
-      default='0000-00001'
+      default='0000-0001'
     )
-
+    def __str__(self):
+      return self.name
 
 class Student(models.Model):
     first_name = models.CharField(
+      help_text="first name of the student",
       max_length=50,
       blank=False,
       null=False
     )
     birth_date = models.DateField(
       verbose_name='date of birth',
+      help_text="Birth date of the student",
       blank=False,
       null=True
     )
@@ -51,7 +54,7 @@ class Student(models.Model):
     )
     email = models.EmailField(
       verbose_name="email",
-      help_text="phone number of the student",
+      help_text="Email of the student",
       blank=False, # pas de champ vide
       null=False, # pas de champ null (a conjuguer avec default
       default="x@y.z",
@@ -70,3 +73,34 @@ class Student(models.Model):
       on_delete=models.CASCADE, # necessaire selon la version de Django
       null=True
     )
+    def __str__(self):
+      return self.email
+
+
+
+class Presence(models.Model):
+    reason = models.CharField(
+      max_length=50,
+      blank=False,
+      null=True,
+      default='aucun'
+    )
+    isMissing = models.BooleanField(
+      help_text ="is the sutdent missing ?",
+      verbose_name="Missing ?",
+      blank=False,
+      null=True,
+      default=0
+    )
+    date = models.DateField(
+      max_length=9,
+      blank=False,
+      null=True,
+      default='0000-0001'
+    )
+    student = models.ManyToManyField(
+      Student
+      )
+    
+
+

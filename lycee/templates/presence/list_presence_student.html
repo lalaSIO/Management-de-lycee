@@ -1,0 +1,23 @@
+{% extends "master.html" %}
+
+{% if liste %}
+  {% block title %}
+    <h3>List of call of roll where {{student.first_name}} {{student.last_name}} was absent :</h3>
+  {% endblock %}
+
+  {% block content %}
+    {% for presence in liste %}
+    <div class="container">
+      <div class="row">
+        <div class = "col-sm-10">
+           <a href="/lycee/presence_detail/{{presence.id }}"> {{student.first_name}} {{student.last_name}} was absent the {{presence.date}} for the following reason : {{presence.reason}}</a>
+       </div>
+      </div>
+    </div>
+    {% endfor %}
+     <h4> number of absense : {{liste.count}} </h4>
+  {% endblock %}
+{% else %}
+  <p> No presence to show .</p>
+
+{% endif %}

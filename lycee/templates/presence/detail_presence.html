@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+
+
+{% if presence%}
+  {% block title %}
+    <h3>detail of a presence of the {{presence.date}} with the reason : {{presence.reason}}</h3>
+  {% endblock %}
+
+  {% block content %}
+   {% for studenta in presence.student.all %}
+    <div class="container">
+      <div class="row">
+        <div class = "col-sm-2">
+           <a href="/lycee/student/{{studenta.id }}">{{studenta.first_name}} {{studenta.last_name}}</a>
+       </div>
+      </div>
+    </div>
+
+   {% endfor %}
+     <h4> number of missing student : {{presence.student.count}} </h4>
+  {% endblock %}
+
+
+{% else %}
+  <p> No student to show .</p>
+
+{% endif %}

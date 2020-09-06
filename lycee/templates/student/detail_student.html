@@ -1,0 +1,28 @@
+{% extends "master.html" %}
+
+
+{% if liste%}
+  {% block title %}
+    <h3>detail of a student</h3>
+  {% endblock %}
+
+  {% block content %}
+          <h3> {{liste.first_name}} {{liste.last_name}}</h3>
+          <ul>
+            <li>{{liste.birth_date}}</li>
+            <li>{{liste.phone}}</li>
+            <li>{{liste.email|lower}}</li>
+            <li>{{liste.cursus}}</li>
+    <div class="boutons">
+          <button class="button radius alert left"><a href="/lycee/student/edit/{{liste.id}}">Edit student data</a></button>
+           <button class="button radius alert left"><a href="/lycee/student_presence/{{liste.id}}">Show call of roll where the student was absent</a></button>
+   </div>
+
+  
+  {% endblock %}
+
+
+{% else %}
+  <p> No student to show .</p>
+
+{% endif %}
